@@ -22,7 +22,6 @@ public class Main {
         in.close();
 
         String docFromURL = getDocFromURL(scannURL);
-        System.out.println(docFromURL + "\n" + "ABOBA" + "\n");
 
         String textFromDoc = getTextFromDoc(docFromURL);
         System.out.println(textFromDoc);
@@ -41,38 +40,30 @@ public class Main {
         catch (Exception ex)
         {
             System.out.println("Введена не ссылка, попробуйте снова!");
+            return "";
         }
 
-        return "";
+
     }
 
     public static String getTextFromDoc(String doc)
     {
-
-        char doc1[] = doc.toCharArray();
+        char docChar[] = doc.toCharArray();
         String outBuf = "";
-        int tagStart = 0;
         boolean shouldOutput = true;
-        boolean badTag = false;
         int num = doc.indexOf("<SCRIPT") == -1 ? (doc.length()) : (doc.indexOf("<SCRIPT"));
         for (int i = 0; i < num; i++)
         {
-            switch (doc1[i]) {
+            switch (docChar[i]) {
                 case '<':
-                    tagStart = i + 1;
                     shouldOutput = false;
                     continue;
                 case '>':
                     shouldOutput = true;
-                    String tagName = "";
-                    for (int l = tagStart; l < i; l++){
-                        tagName += doc1[l];
-                    }
                     continue;
             }
-            //System.out.println(badTag);
-            if (shouldOutput && badTag == false) {
-                outBuf += doc1[i];
+            if (shouldOutput) {
+                outBuf += docChar[i];
             }
         }
         return outBuf;
