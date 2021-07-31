@@ -1,7 +1,9 @@
 package com.company;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Scanner;
 import java.lang.*;
 
@@ -12,10 +14,6 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-
-        String per = "«»,.!?\";:[]()\n\r\t\'";
-        int num = per.length();
-
         Scanner in = new Scanner(System.in);
         System.out.println("Введите ссылку: ");
         String scannURL = in.nextLine();
@@ -24,7 +22,9 @@ public class Main {
         String docFromURL = getDocFromURL(scannURL);
 
         String textFromDoc = getTextFromDoc(docFromURL);
-        System.out.println(textFromDoc);
+        //System.out.println(textFromDoc);
+
+        createMap(textFromDoc);
 
 
     }
@@ -67,6 +67,28 @@ public class Main {
             }
         }
         return outBuf;
+    }
+
+    public static Map createMap(String buf){
+
+        String per = " «»,.!?\";:[]()\n\r\t\'";
+        char perChar[] = per.toCharArray();
+        int num = per.length();
+        Map<String, Integer> karta = new HashMap<String, Integer>();
+        for (int i = 0; i < num; i++){
+            String kek = perChar[i] + "";
+            buf = buf.replace(kek, ";");
+        }
+        //String[] bufString = buf.split(";");
+        char[] kek = buf.toCharArray();
+        for (int i = 0; i < buf.length(); i++)
+        {
+            if (kek[i] != ';')
+                System.out.println(kek[i]);
+        }
+
+
+        return karta;
     }
 
 }
