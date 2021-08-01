@@ -23,8 +23,8 @@ public class Main {
 
         String textFromDoc = getTextFromDoc(docFromURL);
         //System.out.println(textFromDoc);
-
-        createMap(textFromDoc);
+        String[] edStr = ediStr(textFromDoc);
+        Map newMap = createMap(edStr);
 
 
     }
@@ -69,25 +69,31 @@ public class Main {
         return outBuf;
     }
 
-    public static Map createMap(String buf){
+    public static String[] ediStr(String buf){
 
         String per = " «»,.!?\";:[]()\n\r\t\'";
         char perChar[] = per.toCharArray();
         int num = per.length();
-        Map<String, Integer> karta = new HashMap<String, Integer>();
         for (int i = 0; i < num; i++){
             String kek = perChar[i] + "";
             buf = buf.replace(kek, ";");
         }
-        //String[] bufString = buf.split(";");
-        char[] kek = buf.toCharArray();
-        for (int i = 0; i < buf.length(); i++)
-        {
-            if (kek[i] != ';')
-                System.out.println(kek[i]);
+        //System.out.println(buf);
+        String[] bufString = buf.split(";");
+
+        return bufString;
+    }
+
+    public static Map createMap(String[] edStr)
+    {
+        Map<String, Integer> karta = new HashMap<String, Integer>();
+        int count = 0;
+        for (int i = 0; i < edStr.length; i++) {
+            if (karta.containsKey(edStr) == false)
+            {
+
+            }
         }
-
-
         return karta;
     }
 
