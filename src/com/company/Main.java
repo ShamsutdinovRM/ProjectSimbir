@@ -24,8 +24,7 @@ public class Main {
         String textFromDoc = getTextFromDoc(docFromURL);
         //System.out.println(textFromDoc);
         String[] edStr = ediStr(textFromDoc);
-        Map newMap = createMap(edStr);
-
+        createMap(edStr);
 
     }
 
@@ -89,11 +88,13 @@ public class Main {
         Map<String, Integer> karta = new HashMap<String, Integer>();
         int count = 0;
         for (int i = 0; i < edStr.length; i++) {
-            if (karta.containsKey(edStr) == false)
-            {
-
-            }
+            if (!karta.containsKey(edStr[i]) && edStr[i].length() > 0)
+                karta.put(edStr[i], 1);
+            else if (edStr[i].length() > 0)
+                karta.put(edStr[i], karta.get(edStr[i]) + 1);
         }
+        for (Map.Entry<String, Integer> items : karta.entrySet())
+            System.out.println(items.getKey() + " - " + items.getValue());
         return karta;
     }
 
