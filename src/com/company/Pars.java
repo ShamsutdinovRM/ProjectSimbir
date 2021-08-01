@@ -18,7 +18,7 @@ public class Pars {
 
     public static String getTextFromDoc(String doc) {
         char docChar[] = doc.toCharArray();
-        String outBuf = "";
+        String outStr = "";
         boolean shouldOutput = true;
         int num = doc.indexOf("<SCRIPT") == -1 ? (doc.length()) : (doc.indexOf("<SCRIPT"));
         for (int i = 0; i < num; i++) {
@@ -30,10 +30,9 @@ public class Pars {
                     shouldOutput = true;
                     continue;
             }
-            if (shouldOutput) {
-                outBuf += docChar[i];
-            }
+            if (shouldOutput)
+                outStr += docChar[i];
         }
-        return outBuf;
+        return outStr;
     }
 }
